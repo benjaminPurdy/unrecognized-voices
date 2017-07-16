@@ -12,6 +12,7 @@ import java.util.List;
  */
 @RegisterMapper(BillMapper.class)
 public interface BillDao {
+	//test
 
     @SqlQuery("select * from Bill where id = :id")
     Bill findBill(@BindBean Bill bill);
