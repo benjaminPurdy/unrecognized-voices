@@ -1,0 +1,29 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+
+    <changeSet id="1" author="bpurdy">
+        <createTable tableName="Representative">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="tracker" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="first_name" type="varchar(25)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="middle_name" type="varchar(25)"/>
+            <column name="last_name" type="varchar(25)"/>
+            <column name="url" type="varchar(50)"/>
+            <column name="in_office" type="boolean"/>
+            <column name="next_election_date" type="date">
+                    <constraints nullable="false"/>
+            </column>
+            <column name="votes_total" type="integer"/>
+            <column name="votes_missed" type="integer"/>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>
