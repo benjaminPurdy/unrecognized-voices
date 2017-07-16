@@ -2,6 +2,7 @@ package visibility.unrecognizedvoices.jobs.representatives;
 
 import de.spinscale.dropwizard.jobs.Job;
 import de.spinscale.dropwizard.jobs.annotations.Every;
+import org.postgresql.jdbc3.*;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import visibility.unrecognizedvoices.api.ApiHelper;
@@ -9,6 +10,7 @@ import visibility.unrecognizedvoices.db.services.*;
 import visibility.unrecognizedvoices.jobs.representatives.jsons.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import javax.activation.*;
 import java.net.MalformedURLException;
 import java.net.URL;
 

@@ -18,6 +18,9 @@ public class Bill {
 	private String title;
 	private String sponsorId;
 	private String sponsorUri;
+	private String sponsorName;
+	private String sponsorState;
+	private String sponsorParty;
 	private String gpoPdfUri;
 	private String congressDotGovUrl;
 	private String govTrackUrl;
@@ -29,13 +32,40 @@ public class Bill {
 	private boolean vetoed;
 	private int cosponsors;
 	private String committees;
-	private String committeeCodes;
+	private String[] committeeCodes;
+	private String[] subcommitteeCodes;
 	private String primarySubject;
 	private String summary;
 	private String summaryShort;
 	private Date latestMajorActionDate;
 	private String latestMajorAction;
 	private ArrayList<Action> actions;
+
+	public visibility.unrecognizedvoices.core.Bill map() {
+		visibility.unrecognizedvoices.core.Bill bill = new visibility.unrecognizedvoices.core.Bill();
+		bill.setTracker(this.id);
+		bill.setType(this.type);
+		bill.setUrl(this.uri);
+		bill.setTitle(this.title);
+		bill.setSponsorId(this.sponsorId);
+		bill.setSponsorUri(this.sponsorUri);
+		bill.setGpoPdfUri(this.gpoPdfUri);
+		bill.setCongressDotGovUrl(this.congressDotGovUrl);
+		bill.setGovTrackUrl(this.govTrackUrl);
+		bill.setIntroducedDate(this.introducedDate.toString());
+		bill.setVetoed(this.vetoed);
+		bill.setCosponsor(this.cosponsors);
+		bill.setPrimarySubject(this.primarySubject);
+		bill.setSummary(this.summary);
+		bill.setSummaryShort(this.summaryShort);
+		List<visibility.unrecognizedvoices.core.Action> actions = new ArrayList<>();
+//		for (Action action : this.actions) {
+//			actions.add(action.mapToAction());
+//		}
+		bill.setActions(actions);
+
+		return bill;
+	}
 
 	@JsonProperty("bill_id")
 	public String getId() {
@@ -192,12 +222,12 @@ public class Bill {
 		this.committees = committees;
 	}
 
-	public String getCommitteeCodes() {
+	public String[] getCommitteeCodes() {
 		return committeeCodes;
 	}
 
 	@JsonProperty("committee_codes")
-	public void setCommitteeCodes(String committeeCodes) {
+	public void setCommitteeCodes(String[] committeeCodes) {
 		this.committeeCodes = committeeCodes;
 	}
 
@@ -250,6 +280,42 @@ public class Bill {
 
 	public void setActions(ArrayList<Action> actions) {
 		this.actions = actions;
+	}
+
+	public String getSponsorState() {
+		return sponsorState;
+	}
+
+	@JsonProperty("sponsor_state")
+	public void setSponsorState(String sponsorState) {
+		this.sponsorState = sponsorState;
+	}
+
+	public String getSponsorName() {
+		return sponsorName;
+	}
+
+	@JsonProperty("sponsor_name")
+	public void setSponsorName(String sponsorName) {
+		this.sponsorName = sponsorName;
+	}
+
+	public String getSponsorParty() {
+		return sponsorParty;
+	}
+
+	@JsonProperty("sponsor_party")
+	public void setSponsorParty(String sponsorParty) {
+		this.sponsorParty = sponsorParty;
+	}
+
+	public String[] getSubcommitteeCodes() {
+		return subcommitteeCodes;
+	}
+
+	@JsonProperty("subcommittee_codes")
+	public void setSubcommitteeCodes(String[] subcommitteeCodes) {
+		this.subcommitteeCodes = subcommitteeCodes;
 	}
 
 	@Override

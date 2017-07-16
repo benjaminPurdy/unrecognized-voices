@@ -29,9 +29,7 @@ public class RepresentativeService {
 	}
 
 	public void findOrCreateHouseRep(Member member) {
-		try {
 			findOrCreate(member, Congress.HOUSE);
-		} catch (Exception e) {e.printStackTrace();}
 	}
 
 	public void findOrCreateSenateRep(Member member) {

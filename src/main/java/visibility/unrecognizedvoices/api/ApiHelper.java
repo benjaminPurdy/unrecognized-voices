@@ -16,7 +16,7 @@ import static com.google.common.net.HttpHeaders.USER_AGENT;
  */
 public class ApiHelper {
 	private final String PRO_PUBLICA_API_KEY = "oRXhdjzpvG2etsSqwMswE9QWtkkmbOMt52bbmlTG";
-	private final boolean useTestData = false;
+	private final boolean useTestData = true;
 
 	public final String currentPropublicaVersion = "v1";
 	public final String currentPropublicaChamber = "115";
@@ -70,9 +70,11 @@ public class ApiHelper {
 			    case senateBillUpdatedGetRequest:
 				    return IOUtils.toString(classLoader.getResource("fakeData/bills/senate/updated.json"));
 			    default:
-			    	String json = get(url, true);
-				    System.out.println(json);
-				    return json;
+						System.out.println("Invalid url passed in");
+			    	return null;
+//			    	String json = get(url, true);
+//				    System.out.println(json);
+//				    return json;
 		    }
 	    } catch (Exception e) {
 	    	e.printStackTrace();
@@ -81,7 +83,7 @@ public class ApiHelper {
 		return get(url, true);
 	}
 
-	public String get(URL url, boolean includeAuthToken) throws Exception {
+	private String get(URL url, boolean includeAuthToken) throws Exception {
 		HttpURLConnection con = (HttpURLConnection) url.openConnection();
 
 		// By default it is GET request

@@ -30,12 +30,12 @@ public class FetchBillsSenate extends Job {
 	public void doJob(JobExecutionContext context) throws JobExecutionException {
 		if (billService == null) return;
 
-		System.out.println("Entering Fetch Bills Senate");
 		ObjectMapper mapper = apiHelper.getMapper();
 
 		URL apiURL;
 		String apiFullPath = "";
 		for (String type : types) {
+			System.out.println("Entering Fetch Bills Senate: [" + type + "]");
 			try {
 				apiFullPath = apiPath + type + ".json";
 				apiURL = new URL(apiFullPath);
@@ -51,14 +51,14 @@ public class FetchBillsSenate extends Job {
 				}
 				BillsResults results = mappedJson.getResults().get(0);
 				for (Bill bill : results.getBills()) {
-					System.out.println(bill.toString());
-//					representativeService.findOrCreateHouseRep(member);
+					billService.findOrCreate(bill);
 				}
 			} catch (java.io.IOException e) {
 				System.out.println("ERROR: Could not map return JSON correctly.");
 				e.printStackTrace();
 				return;
 			} catch (Exception e) {
+				e.printStackTrace();
 				System.out.println("ERROR: Could not fetch information form url [" + apiFullPath + "].");
 				return;
 			}

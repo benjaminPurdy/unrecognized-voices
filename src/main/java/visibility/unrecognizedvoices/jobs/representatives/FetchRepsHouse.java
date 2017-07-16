@@ -6,6 +6,7 @@ import de.spinscale.dropwizard.jobs.annotations.Every;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import visibility.unrecognizedvoices.api.ApiHelper;
+import visibility.unrecognizedvoices.db.daos.*;
 import visibility.unrecognizedvoices.db.services.*;
 import visibility.unrecognizedvoices.jobs.representatives.jsons.*;
 
@@ -19,6 +20,10 @@ public class FetchRepsHouse extends Job {
 	ApiHelper apiHelper = new ApiHelper();
 	URL apiURL = new URL(apiHelper.propublicaBaseURL + "/congress/" + apiHelper.currentPropublicaVersion + "/" + apiHelper.currentPropublicaChamber + "/house/members.json");
 	final RepresentativeService representativeService;
+
+	public FetchRepsHouse() throws MalformedURLException {
+		representativeService = null;
+	}
 
 	public FetchRepsHouse(RepresentativeService representativeService) throws MalformedURLException {
 		this.representativeService = representativeService;

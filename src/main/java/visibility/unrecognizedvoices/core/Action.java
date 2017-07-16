@@ -7,7 +7,7 @@ import org.joda.time.*;
 /**
  * Created by benjaminpurdy on 12/14/16.
  */
-public class Action {
+public class Action implements Comparable<Action>{
 	 public Action() {}
 
 	@JsonProperty
@@ -34,5 +34,12 @@ public class Action {
 	@Override
 	public String toString() {
 		return "Action{" + "dateTime=" + dateTime + ", description='" + description + '\'' + '}';
+	}
+
+	@Override
+	public int compareTo(Action other) {
+		if (dateTime.isBefore(other.getDateTime()))
+			 return  0;
+		return 1;
 	}
 }

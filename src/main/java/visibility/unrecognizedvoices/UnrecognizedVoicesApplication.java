@@ -1,5 +1,6 @@
 package visibility.unrecognizedvoices;
 
+import com.hubspot.dropwizard.guice.*;
 import de.spinscale.dropwizard.jobs.JobsBundle;
 import io.dropwizard.Application;
 import io.dropwizard.jdbi.DBIFactory;
@@ -35,7 +36,7 @@ public class UnrecognizedVoicesApplication extends Application<UnrecognizedVoice
 	public void initialize(final Bootstrap<UnrecognizedVoicesConfiguration> bootstrap) {
 //		try {
 //      bootstrap.addBundle(new JobsBundle(new FetchRepsHouse()));
-//			bootstrap.addBundle(new JobsBundle(new FetchRepsSenate(null)));
+//			bootstrap.addBundle(new JobsBundle(new FetchRepsSenate()));
 //      bootstrap.addBundle(new JobsBundle(new FetchBillsHouse()));
 //      bootstrap.addBundle(new JobsBundle(new FetchBillsSenate()));
 //		} catch (MalformedURLException exception) {
@@ -66,23 +67,23 @@ public class UnrecognizedVoicesApplication extends Application<UnrecognizedVoice
 		final BillService billService = new BillService(billDao);
 		final RepresentativeService representativeService = new RepresentativeService(representativeDao);
 
-//		try {
-//			FetchRepsSenate fetchRepsSenate = new FetchRepsSenate(representativeService);
-//			fetchRepsSenate.doJob(null);
-//
-//			FetchRepsHouse fetchRepsHouse = new FetchRepsHouse(representativeService);
-//			fetchRepsHouse.doJob(null);
-//
-//			FetchBillsSenate fetchBillsSenate = new FetchBillsSenate(billService);
-//			fetchBillsSenate.doJob(null);
-//
-//			FetchBillsHouse fetchBillsHouse = new FetchBillsHouse(billService);
-//			fetchBillsHouse.doJob(null);
-//		} catch (MalformedURLException e) {
-//			e.printStackTrace();
-//		} catch (JobExecutionException e) {
-//			e.printStackTrace();
-//		}
+		try {
+			FetchRepsSenate fetchRepsSenate = new FetchRepsSenate(representativeService);
+			fetchRepsSenate.doJob(null);
+
+			FetchRepsHouse fetchRepsHouse = new FetchRepsHouse(representativeService);
+			fetchRepsHouse.doJob(null);
+
+			FetchBillsSenate fetchBillsSenate = new FetchBillsSenate(billService);
+			fetchBillsSenate.doJob(null);
+
+			FetchBillsHouse fetchBillsHouse = new FetchBillsHouse(billService);
+			fetchBillsHouse.doJob(null);
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		} catch (JobExecutionException e) {
+			e.printStackTrace();
+		}
 
 		/*
 		 * Resources

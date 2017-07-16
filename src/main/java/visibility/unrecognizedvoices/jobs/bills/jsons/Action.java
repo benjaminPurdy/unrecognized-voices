@@ -15,6 +15,13 @@ public class Action {
 	private Date datetime;
 	private String description;
 
+	public visibility.unrecognizedvoices.core.Action mapToAction() {
+		visibility.unrecognizedvoices.core.Action action = new visibility.unrecognizedvoices.core.Action();
+//		action.setDateTime(this.datetime);
+		action.setDescription(this.description);
+		return action;
+	}
+
 	public Date getDatetime() {
 		return datetime;
 	}
@@ -35,4 +42,5 @@ public class Action {
 	public String toString() {
 		return "Action{" + "datetime=" + datetime + ", description='" + description + '\'' + '}';
 	}
+
 }
